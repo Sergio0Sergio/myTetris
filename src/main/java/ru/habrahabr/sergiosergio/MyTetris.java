@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class MyTetris{
 
-    final String TITLE_OF_PROGRAMM = "Tetris";
+    final String TITLE_OF_PROGRAMM = "Tetris";//
     final int BLOCK_SIZE = 25;
     final int ARC_RADIUS = 6;
     final int FIELD_WIDTH = 10;
