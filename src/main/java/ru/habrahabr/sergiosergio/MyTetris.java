@@ -114,6 +114,35 @@ public class MyTetris{
 
     class Figure{
 
+        private ArrayList<Block> figure = new ArrayList<Block>();
+        private int [][] shape = new int[4][4];
+        private  int type, size, color;
+        private int x = 3, y = 0;
+
+        public Figure(){
+            type = random.nextInt(SHAPES.length);
+            size = SHAPES[type][4][0];
+            color = SHAPES[type][4][1];
+            if (size == 4){
+                y =- 1;
+            }
+            for (int i = 0; i < size; i++){
+                System.arraycopy(SHAPES[type][i], 0, shape[i], 0, SHAPES[type][i].length);
+            }
+            createFromShape();
+        }
+
+        void createFromShape(){
+
+            for (int x = 0; x < size; x++){
+                for(int y = 0; y < size; y++){
+                    if (shape[y][x] == 1){
+                        figure.add(new Block(x + this.x, y + this.y));
+                    }
+                }
+            }
+        }
+
         boolean isTouchTheGround(){
 
             return false;
@@ -152,6 +181,33 @@ public class MyTetris{
 
     class Block{
 
+        private int x, y;
+        public Block(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        public int getX() {
+            return x;
+        }
+
+        public void setX(int x) {
+            this.x = x;
+        }
+
+        public int getY() {
+            return y;
+        }
+
+        public void setY(int y) {
+            this.y = y;
+        }
+
+        void paint(Graphics g, int color){
+
+            g.setColor(new Color(color));
+            g.drawRoundRect(x * BLOCK_SIZE + 1, y * BLOCK_SIZE + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2, ARC_RADIUS, ARC_RADIUS);
+        }
     }
 
     class Canvas extends JPanel{
